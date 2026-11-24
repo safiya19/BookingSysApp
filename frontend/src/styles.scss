@@ -1,0 +1,59 @@
+@use '@angular/material' as mat;
+
+// Self-hosted so builds work offline and no customer data goes to a font CDN.
+@use '@fontsource-variable/figtree';
+
+// Titans Bank brand tokens. White page, blue menu bar.
+:root {
+  --tb-blue-900: #0a2f6e; // menu bar
+  --tb-blue-700: #1452b8; // links, focus, primary actions
+  --tb-blue-50: #eef4fd; // subtle highlights
+  --tb-ink: #172033; // body text
+  --tb-muted: #5b6478; // secondary text
+  --tb-line: #dfe4ec; // borders
+  --tb-white: #ffffff;
+  --tb-font: 'Figtree Variable', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+html {
+  color-scheme: light;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$blue-palette,
+        theme-type: light,
+      ),
+      typography: var(--tb-font),
+      density: 0,
+    )
+  );
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--tb-white);
+  color: var(--tb-ink);
+  font-family: var(--tb-font);
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 3px solid var(--tb-blue-700);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
