@@ -29,7 +29,7 @@ export const TRADING_HOURS_TEXT =
  * The time is rounded up to the next slot.
  * 
 */
-export function DateAndTime(now: Date): { date: string; time: string } {
+export function dateAndTime(now: Date): { date: string; time: string } {
   const iso = new Date(now.getTime() + 2 * 60 * 60 * 1000).toISOString();
   return { date: iso.slice(0, 10), time: iso.slice(11, 16) };
 }
@@ -54,7 +54,7 @@ export function addDays(date: string, days: number): string {
  * booking window, or (for today) every slot has already started.
  */
 export function slotTimes(date: string, now: Date): string[] {
-  const today = DateAndTime(now);
+  const today = dateAndTime(now);
   if (date < today.date || date > addDays(today.date, BOOKING_WINDOW_DAYS))
     return [];
 
