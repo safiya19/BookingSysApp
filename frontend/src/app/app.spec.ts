@@ -18,12 +18,12 @@ describe('App shell', () => {
     expect(header?.textContent).toContain('Titans Bank');
   });
 
-  it('links to booking and booking management', async () => {
+  it('links to the booking page', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const links = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLAnchorElement>('nav a'),
     ).map((a) => a.getAttribute('href'));
-    expect(links).toEqual(['/book', '/manage']);
+    expect(links).toEqual(['/book']);
   });
 });

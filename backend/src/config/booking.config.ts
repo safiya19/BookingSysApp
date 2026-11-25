@@ -18,7 +18,7 @@ export interface TradingHours {
 }
 
 export const BOOKING_RULES = {
-  /** All branches are in South Africa, which has no daylight saving. */
+  /** All branches are in South Africa */
   timezone: 'Africa/Johannesburg',
 
   /** Length of every appointment slot, in minutes. */

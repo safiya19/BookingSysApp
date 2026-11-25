@@ -18,9 +18,6 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         <a routerLink="/book" routerLinkActive="active" ariaCurrentWhenActive="page">
           Book an appointment
         </a>
-        <a routerLink="/manage" routerLinkActive="active" ariaCurrentWhenActive="page">
-          Manage booking
-        </a>
       </nav>
     </mat-toolbar>
   `,
