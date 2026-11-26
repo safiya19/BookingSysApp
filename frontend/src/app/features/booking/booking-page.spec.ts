@@ -2,10 +2,18 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { BookingPage } from './booking-page';
-import { BankService } from '../../core/booking.models';
+import { BankService, ProvinceBranches } from '../../core/booking.models';
 
 const TEST_SERVICES: BankService[] = [
   { code: 'FOREX', name: 'Forex', description: 'Foreign exchange.' },
+];
+const TEST_BRANCHES: ProvinceBranches[] = [
+  {
+    province: 'Gauteng',
+    branches: [
+      { id: 3, name: 'Sandton', province: 'Gauteng', city: 'Johannesburg', tradingHours: 'Mon–Fri' },
+    ],
+  },
 ];
 
 describe('BookingPage', () => {
@@ -21,8 +29,9 @@ describe('BookingPage', () => {
   async function setup() {
     const fixture = TestBed.createComponent(BookingPage);
     const page = fixture.nativeElement as HTMLElement;
-    fixture.detectChanges(); // render and send the services request
+    fixture.detectChanges(); // render and send the services and branches requests
     http.expectOne('/api/services').flush(TEST_SERVICES);
+    http.expectOne('/api/branches').flush(TEST_BRANCHES);
     await fixture.whenStable();
     const nextButtons = () => page.querySelectorAll<HTMLButtonElement>('button[matStepperNext]');
     return { fixture, page, nextButtons };
@@ -40,7 +49,7 @@ describe('BookingPage', () => {
     const { fixture, page, nextButtons } = await setup();
     expect(nextButtons()[0].disabled).toBe(true);
 
-    page.querySelector<HTMLInputElement>('.card input')!.click();
+    page.querySelector<HTMLInputElement>('app-service-step .card input')!.click();
     await fixture.whenStable();
 
     expect(nextButtons()[0].disabled).toBe(false);
@@ -49,9 +58,17 @@ describe('BookingPage', () => {
   it('keeps showing step numbers 1 to 5 after moving forward', async () => {
     const { fixture, page, nextButtons } = await setup();
 
-    page.querySelector<HTMLInputElement>('.card input')!.click();
+    page.querySelector<HTMLInputElement>('app-service-step .card input')!.click();
     await fixture.whenStable();
     nextButtons()[0].click(); // Service -> Branch
+    await fixture.whenStable();
+
+    const [province, branch] = Array.from(page.querySelectorAll<HTMLSelectElement>('app-branch-step select'));
+    province.value = 'Gauteng';
+    province.dispatchEvent(new Event('change'));
+    await fixture.whenStable();
+    branch.value = '3';
+    branch.dispatchEvent(new Event('change'));
     await fixture.whenStable();
     nextButtons()[1].click(); // Branch -> Date & time
     await fixture.whenStable();

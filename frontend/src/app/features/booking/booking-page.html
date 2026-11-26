@@ -13,11 +13,12 @@
     </div>
   </mat-step>
 
-  <mat-step label="Branch">
-    <p class="placeholder">Choose a province and branch</p>
+  <!-- Stepper moves on iff a branch is chosen. -->
+  <mat-step label="Branch" [completed]="!!branch()">
+    <app-branch-step [(selected)]="branch" />
     <div class="actions">
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-flat-button matStepperNext>Next</button>
+      <button mat-flat-button matStepperNext [disabled]="!branch()">Next</button>
     </div>
   </mat-step>
 

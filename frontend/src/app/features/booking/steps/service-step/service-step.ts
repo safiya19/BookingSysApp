@@ -9,7 +9,7 @@ import { BankService } from '../../../../core/booking.models';
 @Component({
   selector: 'app-service-step',
   templateUrl: './service-step.html',
-  styleUrl: './service-step.scss',
+  styleUrls: ['../choice-cards.scss', './service-step.scss'],
 })
 export class ServiceStep {
   /** The chosen service, or null until the customer picks one. */

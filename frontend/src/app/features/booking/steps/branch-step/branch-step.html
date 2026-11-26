@@ -1,0 +1,31 @@
+<h2 class="step-title">Please select your nearest branch below:</h2>
+
+<div class="fields">
+  <mat-form-field appearance="outline">
+    <mat-label>Select a province</mat-label>
+    <!-- Dropdown for province selection -->
+    <select matNativeControl [value]="province()" (change)="chooseProvince($any($event.target).value)">
+      <!-- Default value is blank so only the "Province" label shows -->
+      <option value="" hidden></option>
+      @for (p of provinceList(); track p.province) {
+        <option [value]="p.province">{{ p.province }}</option>
+      }
+    </select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Select a branch</mat-label>
+    <!-- Dropdown for branches in the chosen province. disabled until a province is picked -->
+    <select
+      matNativeControl
+      [disabled]="!province()"
+      [value]="selected()?.id ?? ''"
+      (change)="chooseBranch($any($event.target).value)"
+    >
+      <option value="" hidden></option>
+      @for (branch of branchList(); track branch.id) {
+        <option [value]="branch.id">{{ branch.name }}, {{ branch.city }}</option>
+      }
+    </select>
+  </mat-form-field>
+</div>
