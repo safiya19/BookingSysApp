@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
+/** Still to determine if this page is needed, but it is a good idea to have a 404 page in case the user navigates to a non-existent route. */
 @Component({
   selector: 'app-not-found-page',
   imports: [RouterLink],

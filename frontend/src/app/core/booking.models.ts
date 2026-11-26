@@ -45,8 +45,15 @@ export interface BookingRequest {
   email: string;
   mobile: string;
   idNumber?: string;
+  passportNumber?: string;
   popiaConsent: boolean;
 }
+
+/** Data collected from Your Details page entered by the user to create a BookingRequest. */
+export type CustomerDetails = Pick<
+  BookingRequest,
+  'firstName' | 'lastName' | 'email' | 'mobile' | 'idNumber' | 'passportNumber' | 'popiaConsent'
+>;
 
 export interface BookingConfirmation {
   reference: string;

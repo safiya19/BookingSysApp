@@ -23,7 +23,7 @@ function fromIsoDate(iso: string): Date {
 }
 
 /**
- * Step 3: the customer picks a date on the calendar, then one of the free
+ * The customer picks a date on the calendar, then one of the free
  * times at their branch on that date.
  */
 @Component({
@@ -39,7 +39,7 @@ export class DateTimeStep {
   readonly date = model<string | null>(null);
   readonly time = model<string | null>(null);
 
-  // Bookable range: today up to 30 days ahead.
+  // Bookable range: today up to 30 days ahead - can be changed in the backend's booking-rules.ts - booking_window_days.
   protected readonly firstDay = new Date(new Date().setHours(0, 0, 0, 0));
   protected readonly lastDay = new Date(
     this.firstDay.getFullYear(),

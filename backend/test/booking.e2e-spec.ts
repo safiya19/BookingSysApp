@@ -1,7 +1,10 @@
 import type { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import type { Repository } from 'typeorm';
 import request from 'supertest';
 import { AppModule } from '../src/app.module.js';
+import { Appointment } from '../src/booking/appointment.entity.js';
 import { configureApp } from '../src/app.setup.js';
 import {
   addDays,
@@ -103,6 +106,19 @@ describe('Booking API', () => {
       },
     });
     expect(res.body.message).toContain(res.body.reference);
+  });
+
+  it('saves an optional passport number of any length', async () => {
+    const passportNumber = 'A1234567-LONG-PASSPORT-NUMBER';
+    const res = await http()
+      .post('/api/appointments')
+      .send(booking({ time: '13:00', passportNumber: `  ${passportNumber} ` }))
+      .expect(201);
+
+    const saved = await app
+      .get<Repository<Appointment>>(getRepositoryToken(Appointment))
+      .findOneByOrFail({ reference: res.body.reference });
+    expect(saved.passportNumber).toBe(passportNumber);
   });
 
   it('removes a time once it has been booked 3 times, across all services', async () => {

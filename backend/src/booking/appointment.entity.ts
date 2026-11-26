@@ -46,6 +46,10 @@ export class Appointment {
   @Column({ type: 'varchar', length: 13, nullable: true })
   idNumber: string | null;
 
+  /** Optional, any length, so stored as text rather than a fixed-length varchar. */
+  @Column({ type: 'text', nullable: true })
+  passportNumber: string | null;
+
   @CreateDateColumn()
   createdAt: Date;
 }

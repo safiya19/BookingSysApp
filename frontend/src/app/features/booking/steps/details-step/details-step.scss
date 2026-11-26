@@ -1,0 +1,19 @@
+.step-title {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+// Two fields per row on wider screens, one per row on phones.
+.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.25rem 1rem;
+  max-width: 720px;
+}
+
+// The consent box spans the full width.
+.consent {
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+}

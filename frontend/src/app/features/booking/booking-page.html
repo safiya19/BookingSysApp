@@ -31,11 +31,12 @@
     </div>
   </mat-step>
 
-  <mat-step label="Your details">
-    <p class="placeholder">Name, email, mobile, ID number and POPIA consent tick box</p>
+  <!-- Stepper moves on iff every compulsary detail is valid and POPIA consent is ticked. -->
+  <mat-step label="Your details" [completed]="!!details()">
+    <app-details-step [(details)]="details" />
     <div class="actions">
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-flat-button matStepperNext>Next</button>
+      <button mat-flat-button matStepperNext [disabled]="!details()">Next</button>
     </div>
   </mat-step>
 

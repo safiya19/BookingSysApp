@@ -24,8 +24,8 @@ export const BOOKING_RULES = {
   /** Length of every appointment slot, in minutes. */
   slotLengthMinutes: 30,
 
-  /** Consultants available per service, per branch, per slot. */
-  consultantsPerService: 5,
+  /** Consultants available per slot. */
+  consultantsPerSlot: 3,
 
   /** How far ahead customers may book, in days. */
   bookingWindowDays: 30,

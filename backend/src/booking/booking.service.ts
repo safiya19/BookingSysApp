@@ -53,8 +53,8 @@ export class BookingService {
     // was already full, nothing is inserted.
     await this.appointments.query(
       `INSERT INTO appointments
-         (reference, serviceCode, branchId, date, time, firstName, lastName, email, mobile, idNumber)
-       SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+         (reference, serviceCode, branchId, date, time, firstName, lastName, email, mobile, idNumber, passportNumber)
+       SELECT ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
        WHERE (SELECT COUNT(*) FROM appointments WHERE branchId = ? AND date = ? AND time = ?) < ?`,
       [
         reference,
@@ -67,6 +67,7 @@ export class BookingService {
         dto.email,
         dto.mobile,
         dto.idNumber ?? null,
+        dto.passportNumber ?? null,
         dto.branchId,
         dto.date,
         dto.time,
@@ -106,7 +107,7 @@ export class BookingService {
       message:
         `Titans Bank: Dear ${dto.firstName} ${dto.lastName}, your ${service.name} appointment at ${branch.name} ` +
         `branch is confirmed for ${when}. Ref ${reference}. Please bring your ID.`,
-        //TODO: add via sms or email depending on customer preference. For now, just return the message to the front end.
+      //TODO: add via sms or email depending on customer preference. For now, just return the message to the front end.
     };
   }
 

@@ -1,0 +1,45 @@
+<h2 class="step-title">Please enter your details below:</h2>
+
+<!-- Errors show under a field once the customer has left it. -->
+<form class="fields" [formGroup]="form" novalidate>
+  <mat-form-field appearance="outline">
+    <mat-label>First name</mat-label>
+    <input matInput formControlName="firstName" autocomplete="given-name" />
+    <mat-error>Please enter your first name.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Last name</mat-label>
+    <input matInput formControlName="lastName" autocomplete="family-name" />
+    <mat-error>Please enter your last name.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Email address</mat-label>
+    <input matInput type="email" formControlName="email" autocomplete="email" />
+    <mat-error>Please enter a valid email address, e.g. name&#64;example.com.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Mobile number</mat-label>
+    <input matInput type="tel" formControlName="mobile" autocomplete="tel-national" />
+    <mat-hint>e.g. 082 123 4567</mat-hint>
+    <mat-error>Please enter a 10-digit SA mobile number, e.g. 082 123 4567.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>SA ID number (optional)</mat-label>
+    <input matInput formControlName="idNumber" inputmode="numeric" />
+    <mat-error>An SA ID number has 13 digits.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Passport number (optional)</mat-label>
+    <input matInput formControlName="passportNumber" />
+  </mat-form-field>
+
+  <mat-checkbox class="consent" formControlName="popiaConsent">
+    I consent to Titans Bank processing my personal information to manage this appointment, in
+    line with the Protection of Personal Information Act (POPIA).
+  </mat-checkbox>
+</form>

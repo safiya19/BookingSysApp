@@ -1,9 +1,10 @@
 import { Component, linkedSignal, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
-import { BankService, Branch } from '../../core/booking.models';
+import { BankService, Branch, CustomerDetails } from '../../core/booking.models';
 import { BranchStep } from './steps/branch-step/branch-step';
 import { DateTimeStep } from './steps/date-time-step/date-time-step';
+import { DetailsStep } from './steps/details-step/details-step';
 import { ServiceStep } from './steps/service-step/service-step';
 
 /**
@@ -15,7 +16,7 @@ import { ServiceStep } from './steps/service-step/service-step';
  */
 @Component({
   selector: 'app-booking-page',
-  imports: [MatStepperModule, MatButtonModule, ServiceStep, BranchStep, DateTimeStep],
+  imports: [MatStepperModule, MatButtonModule, ServiceStep, BranchStep, DateTimeStep, DetailsStep ],
   templateUrl: './booking-page.html',
   styleUrls: ['../page.scss', './booking-page.scss'],
 })
@@ -34,4 +35,8 @@ export class BookingPage {
     source: this.date,
     computation: () => null,
   });
+
+  // details is filled in by DetailsStep, to be used in the final review and confirmation step.
+  // null until the form is valid/filled, then it holds the cleaned-up details.
+  protected readonly details = signal<CustomerDetails | null>(null);
 }

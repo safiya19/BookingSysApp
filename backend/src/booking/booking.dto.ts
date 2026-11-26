@@ -5,6 +5,7 @@ import {
   IsIn,
   IsNotEmpty,
   IsOptional,
+  IsString,
   Matches,
   MaxLength,
 } from 'class-validator';
@@ -19,7 +20,7 @@ const removeSpaces = ({ value }: { value: unknown }) =>
 const BRANCH_IDS = BRANCHES.map((b) => b.id);
 
 export class AvailabilityQuery {
-  /** Branch id from GET /api/branches, e.g. 4 (Sandton). */
+  /** Branch id from GET /api/branches, e.g. 3 (Sandton). */
   @Type(() => Number) // query strings arrive as text
   @IsIn(BRANCH_IDS, { message: 'branchId must be a known branch' })
   branchId: number;
@@ -35,7 +36,7 @@ export class CreateAppointmentDto {
   })
   serviceCode: string;
 
-  /** Branch id from GET /api/branches, e.g. 4 (Sandton). */
+  /** Branch id from GET /api/branches, e.g. 3 (Sandton). */
   @IsIn(BRANCH_IDS, { message: 'branchId must be a known branch' })
   branchId: number;
 
@@ -79,6 +80,14 @@ export class CreateAppointmentDto {
   @IsOptional()
   @Matches(/^\d{13}$/, { message: 'idNumber must be 13 digits' })
   idNumber?: string;
+
+  /** Optional passport number, any length. A blank value is treated as not given. */
+  @Transform(({ value }) =>
+    typeof value === 'string' ? value.trim() || undefined : value,
+  )
+  @IsOptional()
+  @IsString()
+  passportNumber?: string;
 
   /** Must be ticked: consent to process personal information (POPIA). */
   @Equals(true, { message: 'popiaConsent must be accepted' })
