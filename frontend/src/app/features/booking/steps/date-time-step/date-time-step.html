@@ -1,0 +1,33 @@
+<h2 class="step-title">Please select an available date and time below:</h2>
+
+@if (branch(); as b) {
+  <p class="hours"><strong>{{ b.name }} trading hours:</strong> {{ b.tradingHours }}</p>
+}
+
+<div class="layout">
+  <!-- Calendar shown on the page: past days, days beyond 30 days, Sundays and public holidays are greyed out. -->
+  <mat-calendar
+    class="calendar"
+    [minDate]="firstDay"
+    [maxDate]="lastDay"
+    [dateFilter]="canBook()"
+    [selected]="selectedDay()"
+    (selectedChange)="chooseDay($event)"
+  />
+
+  <div class="times-panel">
+    @if (fullyBooked()) {
+      <p class="note">No times are available on this day. Please choose another date.</p>
+    }
+
+    <!-- Time buttons: radio inputs styled as buttons, so they work as one choice. -->
+    <div class="times" role="radiogroup" aria-label="Time">
+      @for (t of times(); track t) {
+        <label class="time" [class.selected]="time() === t">
+          <input type="radio" name="time" [value]="t" [checked]="time() === t" (change)="time.set(t)" />
+          {{ t }}
+        </label>
+      }
+    </div>
+  </div>
+</div>

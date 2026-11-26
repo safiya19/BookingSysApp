@@ -1,7 +1,11 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { BRANCHES, PROVINCES, SERVICES } from '../catalogue/catalogue.js';
-import { TRADING_HOURS_TEXT } from './booking-rules.js';
+import {
+  dateAndTime,
+  publicHolidays,
+  TRADING_HOURS_TEXT,
+} from './booking-rules.js';
 import { AvailabilityQuery, CreateAppointmentDto } from './booking.dto.js';
 import { BookingService } from './booking.service.js';
 
@@ -26,6 +30,19 @@ export class BookingController {
         tradingHours: TRADING_HOURS_TEXT,
       })),
     }));
+  }
+
+  /**
+   * Public holidays this year and next, when every branch is closed. That
+   * always covers the 30-day booking window. The calendar greys these out.
+   */
+  @Get('holidays')
+  holidays() {
+    const year = Number(dateAndTime(new Date()).date.slice(0, 4));
+    const holidays = { ...publicHolidays(year), ...publicHolidays(year + 1) };
+    return Object.entries(holidays)
+      .map(([date, name]) => ({ date, name }))
+      .sort((a, b) => a.date.localeCompare(b.date));
   }
 
   /** Times still free at a branch on a date. Fully booked times are left out. */

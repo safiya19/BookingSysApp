@@ -62,6 +62,16 @@ html {
       outlined-focus-label-text-color: var(--tb-blue-700),
     )
   );
+
+  // Calendar: chosen day in Titans blue, today outlined in blue.
+  @include mat.datepicker-overrides(
+    (
+      calendar-date-selected-state-background-color: var(--tb-blue-700),
+      calendar-date-selected-state-text-color: var(--tb-white),
+      calendar-date-today-outline-color: var(--tb-blue-700),
+      calendar-date-hover-state-background-color: var(--tb-blue-50),
+    )
+  );
 }
 
 html,

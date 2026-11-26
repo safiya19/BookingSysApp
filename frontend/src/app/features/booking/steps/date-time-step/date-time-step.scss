@@ -1,0 +1,75 @@
+.step-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.hours {
+  margin: 0 0 1rem;
+  color: var(--tb-muted);
+}
+
+// Calendar and times side by side on wider screens, stacked on phones.
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.calendar {
+  width: 320px;
+  max-width: 100%;
+  border: 1px solid var(--tb-line);
+  border-radius: 8px;
+}
+
+.times-panel {
+  flex: 1 1 240px;
+}
+
+.note {
+  margin: 0;
+  color: var(--tb-muted);
+}
+
+.times {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 0.5rem;
+}
+
+.time {
+  display: block;
+  padding: 0.5rem 0;
+  border: 1px solid var(--tb-line);
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
+}
+
+.time:hover {
+  border-color: var(--tb-blue-700);
+}
+
+.time.selected {
+  border-color: var(--tb-blue-700);
+  background: var(--tb-blue-700);
+  color: var(--tb-white);
+}
+
+// The radio circle is hidden; the button itself shows the choice.
+.time input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.time:has(input:focus-visible) {
+  outline: 3px solid var(--tb-blue-700);
+  outline-offset: 2px;
+}

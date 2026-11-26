@@ -22,11 +22,12 @@
     </div>
   </mat-step>
 
-  <mat-step label="Date & time">
-    <p class="placeholder">Please select an available date and time below</p>
+  <!-- Stepper moves on iff a time is chosen (not only if a date is chosen). -->
+  <mat-step label="Date & time" [completed]="!!time()">
+    <app-date-time-step [branch]="branch()" [(date)]="date" [(time)]="time" />
     <div class="actions">
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-flat-button matStepperNext>Next</button>
+      <button mat-flat-button matStepperNext [disabled]="!time()">Next</button>
     </div>
   </mat-step>
 

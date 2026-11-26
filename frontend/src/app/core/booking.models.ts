@@ -23,6 +23,11 @@ export interface ProvinceBranches {
   branches: Branch[];
 }
 
+export interface PublicHoliday {
+  date: string; // "YYYY-MM-DD"
+  name: string;
+}
+
 export interface Availability {
   branchId: number;
   date: string;

@@ -28,7 +28,7 @@ Unique set of rules and their values for this project:
 | --- | --- |
 | Services | Customer Service, Collections, Forex, Accounts & Lending |
 | Branches | 13, at least one in each of the 9 provinces |
-| Trading hours | Mon–Fri 09:00–15:00, Sat 09:00–13:00, closed Sundays |
+| Trading hours | Mon–Fri 09:00–15:00, Sat 09:00–13:00, closed Sundays and South African public holidays |
 | Slot length | 30 minutes |
 | Bookings per slot | 3 per branch, shared across all services. A full slot is no longer offered. |
 | Booking window | Today (times not yet started) up to 30 days ahead |
@@ -58,7 +58,8 @@ On first start the API creates `backend/data/titans-bank.db` with a single
 | --- | --- | --- |
 | GET | `/api/services` | The four services |
 | GET | `/api/branches` | Branches grouped by province, with trading hours |
-| GET | `/api/availability?branchId=sandton&date=2026-12-01` | Times still free at a branch on a date |
+| GET | `/api/holidays` | Public holidays (no bookings); the calendar greys these out |
+| GET | `/api/availability?branchId=3&date=2026-12-01` | Times still free at a branch on a date |
 | POST | `/api/appointments` | Book; returns the details and message for the confirmation pop-up |
 | GET | `/api/health` | Health check |
 

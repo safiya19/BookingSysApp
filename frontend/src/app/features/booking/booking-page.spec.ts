@@ -29,9 +29,10 @@ describe('BookingPage', () => {
   async function setup() {
     const fixture = TestBed.createComponent(BookingPage);
     const page = fixture.nativeElement as HTMLElement;
-    fixture.detectChanges(); // render and send the services and branches requests
+    fixture.detectChanges(); // render and send the services, branches and holidays requests
     http.expectOne('/api/services').flush(TEST_SERVICES);
     http.expectOne('/api/branches').flush(TEST_BRANCHES);
+    http.expectOne('/api/holidays').flush([]);
     await fixture.whenStable();
     const nextButtons = () => page.querySelectorAll<HTMLButtonElement>('button[matStepperNext]');
     return { fixture, page, nextButtons };
@@ -77,5 +78,19 @@ describe('BookingPage', () => {
       el.textContent?.trim(),
     );
     expect(icons).toEqual(['1', '2', '3', '4', '5']);
+  });
+
+  it('clears the chosen date and time when the customer changes branch', async () => {
+    const { fixture } = await setup();
+    // The choices are protected, so the test reaches them by name.
+    const booking = fixture.componentInstance;
+    booking['branch'].set(TEST_BRANCHES[0].branches[0]);
+    booking['date'].set('2026-12-01');
+    booking['time'].set('09:30');
+
+    booking['branch'].set({ ...TEST_BRANCHES[0].branches[0], id: 4, name: 'Menlyn' });
+
+    expect(booking['date']()).toBeNull();
+    expect(booking['time']()).toBeNull();
   });
 });

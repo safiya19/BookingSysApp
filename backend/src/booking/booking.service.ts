@@ -104,8 +104,9 @@ export class BookingService {
         mobile: dto.mobile,
       },
       message:
-        `Titans Bank: ${dto.firstName}, your ${service.name} appointment at ${branch.name} ` +
+        `Titans Bank: Dear ${dto.firstName} ${dto.lastName}, your ${service.name} appointment at ${branch.name} ` +
         `branch is confirmed for ${when}. Ref ${reference}. Please bring your ID.`,
+        //TODO: add via sms or email depending on customer preference. For now, just return the message to the front end.
     };
   }
 

@@ -3,12 +3,19 @@ import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { AppModule } from '../src/app.module.js';
 import { configureApp } from '../src/app.setup.js';
-import { addDays, dateAndTime } from '../src/booking/booking-rules.js';
+import {
+  addDays,
+  dateAndTime,
+  isPublicHoliday,
+} from '../src/booking/booking-rules.js';
 
-/** The first Tuesday at least two days from now, so every slot is bookable. */
+/** The first Tuesday at least two days from now that is not a public holiday, so every slot is bookable. */
 function upcomingTuesday(): string {
   let date = addDays(dateAndTime(new Date()).date, 2);
-  while (new Date(`${date}T00:00:00Z`).getUTCDay() !== 2)
+  while (
+    new Date(`${date}T00:00:00Z`).getUTCDay() !== 2 ||
+    isPublicHoliday(date)
+  )
     date = addDays(date, 1);
   return date;
 }
@@ -67,6 +74,14 @@ describe('Booking API', () => {
     expect(
       res.body.flatMap((p: { branches: unknown[] }) => p.branches),
     ).toHaveLength(13);
+  });
+
+  it('lists the public holidays for the calendar', async () => {
+    const res = await http().get('/api/holidays').expect(200);
+    expect(res.body).toContainEqual({
+      date: '2026-12-25',
+      name: 'Christmas Day',
+    });
   });
 
   it('books an appointment and returns the confirmation', async () => {
