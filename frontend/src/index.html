@@ -6,9 +6,59 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Book an appointment at a Titans Bank branch.">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="TitanBankLogo.png" />
+
+  <!-- Splash: hides itself if it has already been shown in this browser session.
+       Loaded before the booking page loads. -->
+  <script src="splash.js"></script>
+
+  <!-- Splash styles -->
+  <style>
+    /* White layer in front of the app, with the logo in the middle. */
+    .splash {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: grid;
+      place-items: center;
+      background: #ffffff;
+      pointer-events: none;
+      animation: splash-hide 2s ease forwards;
+    }
+
+    /* 800px (5x the original 160px), shrunk to fit smaller screens. */
+    .splash img {
+      width: min(800px, 90vw, 90vh);
+      height: min(800px, 90vw, 90vh);
+      border-radius: 48px;
+      animation: splash-logo 2s ease forwards;
+    }
+
+    /* 0 to 0.6s: logo fades in. 0.6s to 1.4s: holds. */
+    @keyframes splash-logo {
+      0% { opacity: 0; transform: scale(0.92); }
+      30%, 100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* 1.4s to 2s: the whole layer fades out, then is hidden */
+    @keyframes splash-hide {
+      0%, 70% { opacity: 1; visibility: visible; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    /* Already shown this session, or the user prefers less motion: no splash. */
+    .splash-seen .splash { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .splash { display: none; }
+    }
+  </style>
 </head>
 <body>
   <app-root></app-root>
+
+  <!-- Decorative only, so screen readers skip it. -->
+  <div class="splash" aria-hidden="true">
+    <img src="TitanBankLogo.png" alt="" />
+  </div>
 </body>
 </html>
