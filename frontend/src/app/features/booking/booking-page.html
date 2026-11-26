@@ -1,0 +1,47 @@
+<h1>Book a branch appointment</h1>
+<p class="lead">Please follow the steps below to choose a slot for your required service.</p>
+
+<mat-stepper linear labelPosition="bottom" class="stepper">
+  <!-- Keep showing the step number on finished steps instead of Material's
+       pencil/tick icons, which need an icon font this app doesn't load. -->
+  <ng-template matStepperIcon="edit" let-index="index">{{ index + 1 }}</ng-template>
+  <ng-template matStepperIcon="done" let-index="index">{{ index + 1 }}</ng-template>
+
+  <mat-step label="Service">
+    <p class="placeholder">Choose a service</p>
+    <div class="actions">
+      <button mat-flat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step label="Branch">
+    <p class="placeholder">Choose a province and branch</p>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-flat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step label="Date & time">
+    <p class="placeholder">Please select an available date and time below</p>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-flat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step label="Your details">
+    <p class="placeholder">Name, email, mobile, ID number and POPIA consent tick box</p>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-flat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step label="Confirm">
+    <p class="placeholder">Review your booking and confirm (Thursday).</p>
+    <div class="actions">
+      <button mat-button matStepperPrevious>Back</button>
+    </div>
+  </mat-step>
+</mat-stepper>
