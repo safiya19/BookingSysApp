@@ -52,6 +52,7 @@ describe('BranchStep', () => {
   it('lists the provinces, starts blank, and keeps the branch list disabled until one is chosen', async () => {
     const { provinceSelect, branchSelect, optionsOf } = await setup();
     expect(optionsOf(provinceSelect)).toEqual(['Gauteng', 'Western Cape']);
+    // Nothing is pre-selected. The field starts blank
     expect(provinceSelect.value).toBe('');
     expect(branchSelect.disabled).toBe(true);
     expect(optionsOf(branchSelect)).toEqual([]);
