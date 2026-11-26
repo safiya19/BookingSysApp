@@ -7,16 +7,33 @@
 export interface BankService {
   code: string;
   name: string;
+  description: string;
 }
 
 /**List of services offered by Titans Bank 
  * in the order they should appear in the frontend.
  */
 export const SERVICES: readonly BankService[] = [
-  { code: 'CUSTOMER_SERVICE', name: 'Customer Service' }, // General enquiries, account opening, etc.
-  { code: 'COLLECTIONS', name: 'Collections' }, // Collection of bank cards, documents, etc.
-  { code: 'FOREX', name: 'Forex' }, // Foreign exchange services
-  { code: 'ACCOUNTS_AND_LOANS', name: 'Accounts & Lending' }, // Account management, loan applications, etc.
+  {
+    code: 'CUSTOMER_SERVICE',
+    name: 'Customer Service',
+    description: 'General enquiries and help with your banking.',
+  },
+  {
+    code: 'COLLECTIONS',
+    name: 'Collections',
+    description: 'Bank card collections, documents and other items.',
+  },
+  {
+    code: 'FOREX',
+    name: 'Forex',
+    description: 'Foreign exchange and international transfers.',
+  },
+  {
+    code: 'ACCOUNTS_AND_LOANS',
+    name: 'Accounts & Lending',
+    description: 'Account management, new accounts and loan applications.',
+  },
 ];
 
 /**

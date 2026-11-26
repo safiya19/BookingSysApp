@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
+import { BankService } from '../../core/booking.models';
+import { ServiceStep } from './steps/service-step/service-step';
 
 /**
  * DESCRPTION: Booking page component.
@@ -11,8 +13,11 @@ import { MatStepperModule } from '@angular/material/stepper';
  */
 @Component({
   selector: 'app-booking-page',
-  imports: [MatStepperModule, MatButtonModule],
+  imports: [MatStepperModule, MatButtonModule, ServiceStep],
   templateUrl: './booking-page.html',
   styleUrls: ['../page.scss', './booking-page.scss'],
 })
-export class BookingPage {}
+export class BookingPage {
+  // The customer's choices so far. Each step fills one in.
+  protected readonly service = signal<BankService | null>(null);
+}

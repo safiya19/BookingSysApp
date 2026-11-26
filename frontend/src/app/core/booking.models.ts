@@ -7,6 +7,7 @@
 export interface BankService {
   code: string;
   name: string;
+  description: string;
 }
 
 export interface Branch {

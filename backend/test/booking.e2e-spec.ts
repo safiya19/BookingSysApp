@@ -3,11 +3,11 @@ import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { AppModule } from '../src/app.module.js';
 import { configureApp } from '../src/app.setup.js';
-import { addDays, DateAndTime } from '../src/booking/booking-rules.js';
+import { addDays, dateAndTime } from '../src/booking/booking-rules.js';
 
 /** The first Tuesday at least two days from now, so every slot is bookable. */
 function upcomingTuesday(): string {
-  let date = addDays(DateAndTime(new Date()).date, 2);
+  let date = addDays(dateAndTime(new Date()).date, 2);
   while (new Date(`${date}T00:00:00Z`).getUTCDay() !== 2)
     date = addDays(date, 1);
   return date;

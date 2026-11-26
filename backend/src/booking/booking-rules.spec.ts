@@ -1,16 +1,16 @@
 import {
   formatAppointment,
   slotTimes,
-  DateAndTime,
+  dateAndTime,
 } from './booking-rules.js';
 
-// Monday 30 November 2026, 10:15 in South Africa (08:15 UTC).
+// Monday 30 November 2026, 10:15.
 const NOW = new Date('2026-11-30T08:15:00Z');
 
 describe('booking rules', () => {
   it('converts UTC to South African time', () => {
-    expect(DateAndTime(NOW)).toEqual({ date: '2026-11-30', time: '10:15' });
-    expect(DateAndTime(new Date('2026-11-30T23:00:00Z'))).toEqual({
+    expect(dateAndTime(NOW)).toEqual({ date: '2026-11-30', time: '10:15' });
+    expect(dateAndTime(new Date('2026-11-30T23:00:00Z'))).toEqual({
       date: '2026-12-01',
       time: '01:00',
     });

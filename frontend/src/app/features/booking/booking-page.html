@@ -2,15 +2,14 @@
 <p class="lead">Please follow the steps below to choose a slot for your required service.</p>
 
 <mat-stepper linear labelPosition="bottom" class="stepper">
-  <!-- Keep showing the step number on finished steps instead of Material's
-       pencil/tick icons, which need an icon font this app doesn't load. -->
   <ng-template matStepperIcon="edit" let-index="index">{{ index + 1 }}</ng-template>
   <ng-template matStepperIcon="done" let-index="index">{{ index + 1 }}</ng-template>
 
-  <mat-step label="Service">
-    <p class="placeholder">Choose a service</p>
+  <!-- Stepper moves on iff a service is chosen. -->
+  <mat-step label="Service" [completed]="!!service()">
+    <app-service-step [(selected)]="service" />
     <div class="actions">
-      <button mat-flat-button matStepperNext>Next</button>
+      <button mat-flat-button matStepperNext [disabled]="!service()">Next</button>
     </div>
   </mat-step>
 
@@ -39,7 +38,7 @@
   </mat-step>
 
   <mat-step label="Confirm">
-    <p class="placeholder">Review your booking and confirm (Thursday).</p>
+    <p class="placeholder">Review your booking and confirm</p>
     <div class="actions">
       <button mat-button matStepperPrevious>Back</button>
     </div>
