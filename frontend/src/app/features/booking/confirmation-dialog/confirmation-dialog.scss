@@ -1,13 +1,22 @@
-.reference-label {
-  margin: 0;
-  color: var(--tb-muted);
-  font-size: 0.875rem;
+$text-size: 1.125rem; // previously 0.875rem
+
+// The confirmation text from the API, with a space below it before the reference.
+.message {
+  margin: 1rem 0 1.5rem;
+  font-size: $text-size;
+  color: var(--tb-ink);
 }
 
-// The reference is what customers need at the branch, so it stands out.
+.reference-label {
+  margin: 0;
+  font-size: $text-size;
+  color: var(--tb-muted);
+}
+
+// The reference is what customers need at the branch.
 .reference {
-  margin: 0.25rem 0 1rem;
-  font-size: 0.875;//1.75rem;
+  margin: 0 0 1.5rem;
+  font-size: $text-size;
   font-weight: 400;
   letter-spacing: 0.08em;
   color: var(--tb-blue-700);
@@ -40,7 +49,8 @@ dd {
   color: var(--tb-ink);
 }
 
-.message {
+.note {
   margin: 1rem 0 0;
-  color: var(--tb-ink);
+  font-weight: 700;
+  color: var(--tb-red);
 }

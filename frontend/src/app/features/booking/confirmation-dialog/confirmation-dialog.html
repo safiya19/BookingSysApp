@@ -3,7 +3,8 @@
 <mat-dialog-content>
   <!-- The confirmation text from the API (what an SMS or email would say). -->
   <p class="message">{{ booking.message }}</p>
-  <p class="reference-label">Your reference number</p>
+
+  <p class="reference-label">Reference number:</p>
   <p class="reference">{{ booking.reference }}</p>
 
   <dl class="summary">
@@ -28,8 +29,8 @@
       <dd>{{ booking.branchName }}</dd>
     </div>
   </dl>
-  <p class="note"> This confirmation message has been sent to the provided email. To cancel or reschedule your
-  booking, please contact the branch directly.</p>
+  <p class="note"> This confirmation message has been sent to the provided contact details via email and sms. 
+    To cancel or reschedule your booking, please contact the branch directly.</p>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

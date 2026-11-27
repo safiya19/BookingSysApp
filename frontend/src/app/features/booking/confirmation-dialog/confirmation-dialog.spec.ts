@@ -29,7 +29,13 @@ describe('ConfirmationDialog', () => {
 
     expect(page.querySelector('.reference')?.textContent).toBe('TB-7K3P9Q');
     const rows = Array.from(page.querySelectorAll('.row dd')).map((el) => el.textContent?.trim());
-    expect(rows).toEqual(['Forex', 'Sandton', 'Tue, 01 Dec 2026 at 10:00', 'Thandi Nkosi']);
+    expect(rows).toEqual([
+      'Thandi Nkosi',
+      'thandi@example.com',
+      'Forex',
+      'Tue, 01 Dec 2026 at 10:00',
+      'Sandton',
+    ]);
     expect(page.querySelector('.message')?.textContent).toBe(CONFIRMATION.message);
   });
 });

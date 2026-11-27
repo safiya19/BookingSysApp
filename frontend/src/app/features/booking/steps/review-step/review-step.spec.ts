@@ -45,7 +45,7 @@ describe('ReviewStep', () => {
       'Date & time': 'Tue, 01 Dec 2026 at 10:00',
       Name: 'Thandi Nkosi',
       Email: 'thandi@example.com',
-      Mobile: '082 123 4567',
+      Cell: '082 123 4567',
     });
   });
 
