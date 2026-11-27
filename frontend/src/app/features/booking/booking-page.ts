@@ -5,6 +5,7 @@ import { BankService, Branch, CustomerDetails } from '../../core/booking.models'
 import { BranchStep } from './steps/branch-step/branch-step';
 import { DateTimeStep } from './steps/date-time-step/date-time-step';
 import { DetailsStep } from './steps/details-step/details-step';
+import { ReviewStep } from './steps/review-step/review-step';
 import { ServiceStep } from './steps/service-step/service-step';
 
 /**
@@ -16,7 +17,15 @@ import { ServiceStep } from './steps/service-step/service-step';
  */
 @Component({
   selector: 'app-booking-page',
-  imports: [MatStepperModule, MatButtonModule, ServiceStep, BranchStep, DateTimeStep, DetailsStep ],
+  imports: [
+    MatStepperModule,
+    MatButtonModule,
+    ServiceStep,
+    BranchStep,
+    DateTimeStep,
+    DetailsStep,
+    ReviewStep,
+  ],
   templateUrl: './booking-page.html',
   styleUrls: ['../page.scss', './booking-page.scss'],
 })

@@ -33,7 +33,7 @@ export class BookingController {
   }
 
   /**
-   * Public holidays this year and next, when every branch is closed. That
+   * Public holidays, when every branch is closed. That
    * always covers the 30-day booking window. The calendar greys these out.
    */
   @Get('holidays')

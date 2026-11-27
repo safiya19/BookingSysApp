@@ -40,8 +40,15 @@
     </div>
   </mat-step>
 
+  <!-- Summary of every choice -->
   <mat-step label="Confirm">
-    <p class="placeholder">Review your booking and confirm</p>
+    <app-review-step
+      [service]="service()"
+      [branch]="branch()"
+      [date]="date()"
+      [time]="time()"
+      [details]="details()"
+    />
     <div class="actions">
       <button mat-button matStepperPrevious>Back</button>
     </div>

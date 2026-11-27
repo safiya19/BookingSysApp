@@ -1,0 +1,44 @@
+.step-title {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+// A bordered panel with one row per detail: label on the left, value on the right.
+.summary {
+  margin: 0;
+  max-width: 640px;
+  border: 1px solid var(--tb-line);
+  border-radius: 8px;
+  background: var(--tb-white);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+}
+
+.row + .row {
+  border-top: 1px solid var(--tb-line);
+}
+
+dt {
+  color: var(--tb-muted);
+}
+
+dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--tb-ink);
+  overflow-wrap: anywhere; // long emails and passport numbers wrap instead of overflowing
+}
+
+// Phones: label above value.
+@media (max-width: 480px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0.125rem;
+  }
+}

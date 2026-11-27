@@ -32,9 +32,12 @@ function optionalSaId(control: AbstractControl<string>): ValidationErrors | null
 }
 
 /**
- * Customer's contact details and POPIA consent.
- * 'details' holds the cleaned-up details while the form is valid, and null otherwise.
- */
+ *  DESCRPTION: Review step component.
+ * This component requires the customer to fill in their contact details and consent to POPIA.
+ * The form is valid only when all required fields are filled in correctly, and the consent checkbox is checked.
+ * When valid, the cleaned-up details are shared with the parent booking component for the final review and confirmation step.
+ * 'details' holds the cleaned-up details 
+*/
 @Component({
   selector: 'app-details-step',
   imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule],
