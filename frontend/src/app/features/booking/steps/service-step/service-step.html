@@ -1,0 +1,18 @@
+<h2 class="step-title">Please select your required service below:</h2>
+
+<!-- Radio buttons styled as cards: keyboard and screen readers treat them as one choice. -->
+<div class="cards" role="radiogroup" aria-label="Service">
+  @for (service of serviceList(); track service.code) {
+    <label class="card" [class.selected]="selected()?.code === service.code">
+      <input
+        type="radio"
+        name="service"
+        [value]="service.code"
+        [checked]="selected()?.code === service.code"
+        (change)="selected.set(service)"
+      />
+      <span class="name">{{ service.name }}</span>
+      <span class="description">{{ service.description }}</span>
+    </label>
+  }
+</div>

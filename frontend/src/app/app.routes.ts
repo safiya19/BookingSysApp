@@ -8,12 +8,6 @@ export const routes: Routes = [
     loadComponent: () => import('./features/booking/booking-page').then((m) => m.BookingPage),
   },
   {
-    path: 'manage',
-    title: 'Manage a booking | Titans Bank',
-    loadComponent: () =>
-      import('./features/manage-booking/manage-booking-page').then((m) => m.ManageBookingPage),
-  },
-  {
     path: '**',
     title: 'Page not found | Titans Bank',
     loadComponent: () =>

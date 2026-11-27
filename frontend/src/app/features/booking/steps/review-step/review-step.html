@@ -1,0 +1,64 @@
+<h2 class="step-title">Please review your booking details below:</h2>
+
+<dl class="summary">
+
+  @if (details(); as d) {
+    <div class="row">
+      <dt>Name</dt>
+      <dd>{{ d.firstName }} {{ d.lastName }}</dd>
+    </div>
+
+    <div class="row">
+      <dt>Email</dt>
+      <dd>{{ d.email }}</dd>
+    </div>
+
+    <div class="row">
+      <dt>Cell</dt>
+      <dd>{{ mobile() }}</dd>
+    </div>
+    
+  <div class="row">
+    <dt>Service</dt>
+    <dd>{{ service()?.name }}</dd>
+  </div>
+
+  <div class="row">
+    <dt>Branch</dt>
+    <dd>
+      @if (branch(); as b) {
+        {{ b.name }}, {{ b.city }}
+      }
+    </dd>
+  </div>
+
+  <div class="row">
+    <dt>Date &amp; time</dt>
+    <dd>
+      @if (date() && time()) {
+        {{ date() | date: 'EEE, dd MMM y' }} at {{ time() }}
+      }
+    </dd>
+  </div>
+
+    <!-- Optional details: only shown if the customer gave them. -->
+    @if (d.idNumber) {
+      <div class="row">
+        <dt>SA ID number</dt>
+        <dd>{{ d.idNumber }}</dd>
+      </div>
+    }
+    @if (d.passportNumber) {
+      <div class="row">
+        <dt>Passport number</dt>
+        <dd>{{ d.passportNumber }}</dd>
+      </div>
+    }
+  }
+</dl>
+
+<p class="note">
+  NOTE: To edit any details, please go back to the previous steps before confirming. Once
+  confirmed, you will not be able to edit your personal details.
+</p>
+

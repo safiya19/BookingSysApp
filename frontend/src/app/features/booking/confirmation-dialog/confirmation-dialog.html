@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Booking confirmed</h2>
+
+<mat-dialog-content>
+  <!-- The confirmation text from the API (what an SMS or email would say). -->
+  <p class="message">{{ booking.message }}</p>
+
+  <p class="reference-label">Reference number:</p>
+  <p class="reference">{{ booking.reference }}</p>
+
+  <dl class="summary">
+    <div class="row">
+      <dt>Name</dt>
+      <dd>{{ booking.customer.firstName }} {{ booking.customer.lastName }}</dd>
+    </div>
+    <div class="row">
+      <dt>Email</dt>
+      <dd>{{ booking.customer.email }}</dd>
+    </div>
+    <div class="row">
+      <dt>Cell</dt>
+      <dd>{{ booking.customer.mobile }}</dd>
+    </div>
+    <div class="row">
+      <dt>Service</dt>
+      <dd>{{ booking.service.name }}</dd>
+    </div>
+    <div class="row">
+      <dt>Branch</dt>
+      <dd>{{ booking.branchName }}</dd>
+    </div>
+    <div class="row">
+      <dt>Date &amp; time</dt>
+      <dd>{{ booking.date | date: 'EEE, dd MMM y' }} at {{ booking.time }}</dd>
+    </div>
+    
+  </dl>
+  <p class="note"> This confirmation message has been sent to the provided contact details via email and sms. 
+    To cancel or reschedule your booking, please contact the branch directly.</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button mat-dialog-close>Done</button>
+</mat-dialog-actions>

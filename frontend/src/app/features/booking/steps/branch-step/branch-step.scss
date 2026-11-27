@@ -1,0 +1,17 @@
+.step-title {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+// Province and branch side by side on wider screens, stacked on phones.
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+}
+
+.fields mat-form-field {
+  flex: 1 1 260px;
+  max-width: 360px;
+}

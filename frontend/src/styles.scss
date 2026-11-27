@@ -12,6 +12,7 @@
   --tb-muted: #5b6478; // secondary text
   --tb-line: #dfe4ec; // borders
   --tb-white: #ffffff;
+  --tb-red: #863333; // important notices (readable on white)
   --tb-font: 'Figtree Variable', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -25,6 +26,51 @@ html {
       ),
       typography: var(--tb-font),
       density: 0,
+    )
+  );
+  // Set of colours for Titans Bank's stepper, buttons, and dropdowns
+  // Stepper icons are grey if not reached yet. Current and finished steps turn Titans blue
+  @include mat.stepper-overrides(
+    (
+      container-color: transparent,
+      line-color: var(--tb-line),
+      header-icon-background-color: #e3e7ee,
+      header-icon-foreground-color: var(--tb-muted),
+      header-selected-state-icon-background-color: var(--tb-blue-700),
+      header-selected-state-icon-foreground-color: var(--tb-white),
+      header-done-state-icon-background-color: var(--tb-blue-700),
+      header-done-state-icon-foreground-color: var(--tb-white),
+      header-edit-state-icon-background-color: var(--tb-blue-700),
+      header-edit-state-icon-foreground-color: var(--tb-white),
+      header-label-text-color: var(--tb-muted),
+      header-selected-state-label-text-color: var(--tb-blue-900),
+    )
+  );
+
+  // Next (filled) and Back (text) buttons.
+  @include mat.button-overrides(
+    (
+      filled-container-color: var(--tb-blue-700),
+      filled-label-text-color: var(--tb-white),
+      text-label-text-color: var(--tb-blue-700),
+    )
+  );
+
+  // Dropdown outline and label turn Titans blue when focused.
+  @include mat.form-field-overrides(
+    (
+      outlined-focus-outline-color: var(--tb-blue-700),
+      outlined-focus-label-text-color: var(--tb-blue-700),
+    )
+  );
+
+  // Calendar: chosen day in Titans blue, today outlined in blue.
+  @include mat.datepicker-overrides(
+    (
+      calendar-date-selected-state-background-color: var(--tb-blue-700),
+      calendar-date-selected-state-text-color: var(--tb-white),
+      calendar-date-today-outline-color: var(--tb-blue-700),
+      calendar-date-hover-state-background-color: var(--tb-blue-50),
     )
   );
 }
