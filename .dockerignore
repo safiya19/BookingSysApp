@@ -1,0 +1,13 @@
+# Not copied into the Docker build: installed or built inside the image instead,
+# or local-only files.
+.git
+**/node_modules
+**/dist
+**/.angular
+**/*.tsbuildinfo
+**/.env
+**/.vscode
+**/coverage
+
+# Local SQLite database (bookings made during development)
+backend/data
