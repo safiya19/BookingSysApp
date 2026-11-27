@@ -100,6 +100,29 @@ Open the app via `localhost`. The API's security headers ask browsers to
 use HTTPS, which the container does not provide, so opening it from another
 computer by IP address over plain HTTP may not load.
 
+### How to view the bookings in the Docker database
+
+The container keeps its database in the `titans-data` volume, not in
+`backend/data/titans-bank.db` (that file belongs to the local development
+setup). To look at the Docker bookings:
+
+1. Copy the database out of the container (from the project root):
+
+   ```bash
+   docker cp titans-bank:/app/data/titans-bank.db backend/data/titans-bank-docker.db
+   ```
+
+   `backend/data/*.db` is in `.gitignore`, so the copy is never committed.
+
+2. Open `backend/data/titans-bank-docker.db` in a SQLite viewer, for example
+   the "SQLite Viewer" extension in VS Code or
+   [DB Browser for SQLite](https://sqlitebrowser.org/), and browse the
+   `appointments` table.
+
+The copy is a snapshot. To see bookings made after copying, close the file in
+the viewer and run the `docker cp` command again. Editing the copy does not
+change the app's data.
+
 ## API
 
 | Method | Path | Purpose |
