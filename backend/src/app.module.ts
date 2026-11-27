@@ -5,6 +5,7 @@ import { dirname } from 'node:path';
 import { Appointment } from './booking/appointment.entity.js';
 import { BookingController } from './booking/booking.controller.js';
 import { BookingService } from './booking/booking.service.js';
+import { DemoAppointments } from './booking/demo-appointments.js';
 
 @Module({
   imports: [
@@ -27,6 +28,6 @@ import { BookingService } from './booking/booking.service.js';
     TypeOrmModule.forFeature([Appointment]),
   ],
   controllers: [BookingController],
-  providers: [BookingService],
+  providers: [BookingService, DemoAppointments],
 })
 export class AppModule {}

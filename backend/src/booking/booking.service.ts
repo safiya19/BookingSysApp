@@ -106,8 +106,7 @@ export class BookingService {
       },
       message:
         `Dear ${dto.firstName} ${dto.lastName}, your ${service.name} appointment at ${branch.name} ` +
-        `branch is confirmed for ${when}. Please bring your ID or passport.`,
-      //TODO: add via sms or email depending on customer preference. For now, just return the message to the front end.
+        `branch is confirmed for ${when}. Please bring your ID or passport. Ref ${reference}.`,
     };
   }
 
