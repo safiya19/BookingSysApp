@@ -36,8 +36,8 @@
     </div>
 
     <div class="row">
-      <dt>Mobile</dt>
-      <dd>{{ mobile() }}</dd>
+      <dt>Cell</dt>
+      <dd>{{ d.mobile }}</dd>
     </div>
 
     <!-- Optional details: only shown if the customer gave them. -->
@@ -53,9 +53,11 @@
         <dd>{{ d.passportNumber }}</dd>
       </div>
     }
-    <p> NOTE: To edit any details, please go back to the previous steps before confirming. 
-      Once confirmed, you will not be able to change your booking details. 
-      To cancel or reschedule your booking, please contact the branch directly.
-    </p>
   }
 </dl>
+
+<p class="note">
+  NOTE: To edit any details, please go back to the previous steps before confirming. Once
+  confirmed, you will not be able to edit your personal details.
+</p>
+

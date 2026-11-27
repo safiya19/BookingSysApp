@@ -1,56 +1,72 @@
 <h1>Book a branch appointment</h1>
 <p class="lead">Please follow the steps below to choose a slot for your required service.</p>
 
-<mat-stepper linear labelPosition="bottom" class="stepper">
-  <ng-template matStepperIcon="edit" let-index="index">{{ index + 1 }}</ng-template>
-  <ng-template matStepperIcon="done" let-index="index">{{ index + 1 }}</ng-template>
+<!-- A new booking round rebuilds the stepper from scratch: back to step 1 with empty forms. -->
+@for (round of [bookingRound()]; track round) {
+  <mat-stepper linear labelPosition="bottom" class="stepper">
+    <ng-template matStepperIcon="edit" let-index="index">{{ index + 1 }}</ng-template>
+    <ng-template matStepperIcon="done" let-index="index">{{ index + 1 }}</ng-template>
 
-  <!-- Stepper moves on iff a service is chosen. -->
-  <mat-step label="Service" [completed]="!!service()">
-    <app-service-step [(selected)]="service" />
-    <div class="actions">
-      <button mat-flat-button matStepperNext [disabled]="!service()">Next</button>
-    </div>
-  </mat-step>
+    <!-- Stepper moves on iff a service is chosen. -->
+    <mat-step label="Service" [completed]="!!service()">
+      <app-service-step [(selected)]="service" />
+      <div class="actions">
+        <button mat-flat-button matStepperNext [disabled]="!service()">Next</button>
+      </div>
+    </mat-step>
 
-  <!-- Stepper moves on iff a branch is chosen. -->
-  <mat-step label="Branch" [completed]="!!branch()">
-    <app-branch-step [(selected)]="branch" />
-    <div class="actions">
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-flat-button matStepperNext [disabled]="!branch()">Next</button>
-    </div>
-  </mat-step>
+    <!-- Stepper moves on iff a branch is chosen. -->
+    <mat-step label="Branch" [completed]="!!branch()">
+      <app-branch-step [(selected)]="branch" />
+      <div class="actions">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-flat-button matStepperNext [disabled]="!branch()">Next</button>
+      </div>
+    </mat-step>
 
-  <!-- Stepper moves on iff a time is chosen (not only if a date is chosen). -->
-  <mat-step label="Date & time" [completed]="!!time()">
-    <app-date-time-step [branch]="branch()" [(date)]="date" [(time)]="time" />
-    <div class="actions">
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-flat-button matStepperNext [disabled]="!time()">Next</button>
-    </div>
-  </mat-step>
+    <!-- Stepper moves on iff a time is chosen (not only if a date is chosen). -->
+    <mat-step label="Date & time" [completed]="!!time()">
+      <app-date-time-step [branch]="branch()" [(date)]="date" [(time)]="time" />
+      <div class="actions">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-flat-button matStepperNext [disabled]="!time()">Next</button>
+      </div>
+    </mat-step>
 
-  <!-- Stepper moves on iff every compulsary detail is valid and POPIA consent is ticked. -->
-  <mat-step label="Your details" [completed]="!!details()">
-    <app-details-step [(details)]="details" />
-    <div class="actions">
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-flat-button matStepperNext [disabled]="!details()">Next</button>
-    </div>
-  </mat-step>
+    <!-- Stepper moves on iff every compulsary detail is valid and POPIA consent is ticked. -->
+    <mat-step label="Your details" [completed]="!!details()">
+      <app-details-step [(details)]="details" />
+      <div class="actions">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-flat-button matStepperNext [disabled]="!details()">Next</button>
+      </div>
+    </mat-step>
 
-  <!-- Summary of every choice -->
-  <mat-step label="Confirm">
-    <app-review-step
-      [service]="service()"
-      [branch]="branch()"
-      [date]="date()"
-      [time]="time()"
-      [details]="details()"
-    />
-    <div class="actions">
-      <button mat-button matStepperPrevious>Back</button>
-    </div>
-  </mat-step>
-</mat-stepper>
+    <!-- Summary of every choice -->
+    <mat-step label="Confirm">
+      <app-review-step
+        [details]="details()"
+        [service]="service()"
+        [branch]="branch()"
+        [date]="date()"
+        [time]="time()"  
+      />
+
+      @if (bookingError(); as message) {
+        <p class="booking-error" role="alert">{{ message }}</p>
+      }
+
+      <div class="actions">
+        <button mat-button matStepperPrevious [disabled]="submitting()">Back</button>
+        <!-- Disabled while sending to prevent accidental double bookings, after a full slot clears the time, and once booked. -->
+        <button
+          mat-flat-button
+          (click)="confirm()"
+          [disabled]="submitting() || !time() || !!confirmation()"
+        >
+          {{ submitting() ? 'Booking…' : 'Confirm booking' }}
+        </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+}

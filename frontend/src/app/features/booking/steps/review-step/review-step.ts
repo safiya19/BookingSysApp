@@ -21,7 +21,7 @@ export class ReviewStep {
   readonly time = input<string | null>(null);
   readonly details = input<CustomerDetails | null>(null);
 
-  // "0821234567" -> "082 123 4567", easier to check at a glance.
+  // Adds spaces between digits for easier reading e.g. "082 123 4567".
   protected readonly mobile = computed(() => {
     const m = this.details()?.mobile ?? '';
     return m.length === 10 ? `${m.slice(0, 3)} ${m.slice(3, 6)} ${m.slice(6)}` : m;

@@ -35,6 +35,15 @@ dd {
   overflow-wrap: anywhere; // long emails and passport numbers wrap instead of overflowing
 }
 
+// The note under the panel: bold red, so customers read it before confirming.
+.note {
+  max-width: 640px;
+  margin: 1rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--tb-red);
+}
+
 // Phones: label above value.
 @media (max-width: 480px) {
   .row {
