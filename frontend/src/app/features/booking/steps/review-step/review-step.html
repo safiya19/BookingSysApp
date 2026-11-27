@@ -1,6 +1,23 @@
 <h2 class="step-title">Please review your booking details below:</h2>
 
 <dl class="summary">
+
+  @if (details(); as d) {
+    <div class="row">
+      <dt>Name</dt>
+      <dd>{{ d.firstName }} {{ d.lastName }}</dd>
+    </div>
+
+    <div class="row">
+      <dt>Email</dt>
+      <dd>{{ d.email }}</dd>
+    </div>
+
+    <div class="row">
+      <dt>Cell</dt>
+      <dd>{{ mobile() }}</dd>
+    </div>
+    
   <div class="row">
     <dt>Service</dt>
     <dd>{{ service()?.name }}</dd>
@@ -23,22 +40,6 @@
       }
     </dd>
   </div>
-
-  @if (details(); as d) {
-    <div class="row">
-      <dt>Name</dt>
-      <dd>{{ d.firstName }} {{ d.lastName }}</dd>
-    </div>
-
-    <div class="row">
-      <dt>Email</dt>
-      <dd>{{ d.email }}</dd>
-    </div>
-
-    <div class="row">
-      <dt>Cell</dt>
-      <dd>{{ mobile() }}</dd>
-    </div>
 
     <!-- Optional details: only shown if the customer gave them. -->
     @if (d.idNumber) {

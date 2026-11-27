@@ -17,17 +17,22 @@
       <dd>{{ booking.customer.email }}</dd>
     </div>
     <div class="row">
-      <dt>Service</dt>
-      <dd>{{ booking.service.name }}</dd>
+      <dt>Cell</dt>
+      <dd>{{ booking.customer.mobile }}</dd>
     </div>
     <div class="row">
-      <dt>Date &amp; time</dt>
-      <dd>{{ booking.date | date: 'EEE, dd MMM y' }} at {{ booking.time }}</dd>
+      <dt>Service</dt>
+      <dd>{{ booking.service.name }}</dd>
     </div>
     <div class="row">
       <dt>Branch</dt>
       <dd>{{ booking.branchName }}</dd>
     </div>
+    <div class="row">
+      <dt>Date &amp; time</dt>
+      <dd>{{ booking.date | date: 'EEE, dd MMM y' }} at {{ booking.time }}</dd>
+    </div>
+    
   </dl>
   <p class="note"> This confirmation message has been sent to the provided contact details via email and sms. 
     To cancel or reschedule your booking, please contact the branch directly.</p>
